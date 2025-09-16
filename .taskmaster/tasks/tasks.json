@@ -68,36 +68,18 @@
       },
       {
         "id": 2,
-        "title": "Configure PostgreSQL with pgvector",
+        "title": "Configure PostgreSQL and ChromaDB",
         "description": "Set up PostgreSQL database for structured data and ChromaDB for vector storage.",
         "status": "in-progress",
         "dependencies": [
           1
         ],
         "priority": "medium",
-        "details": "Install PostgreSQL for structured data storage and ChromaDB for vector storage. Create a simple PostgreSQL schema for users, sessions, etc. Pre-embed sample documents into a Chroma collection and include them in the project repository.",
-        "testStrategy": "Verify the PostgreSQL schema is correctly set up and ChromaDB is functioning with pre-embedded documents. Ensure the setup process is simple for testers.",
+        "details": "Install PostgreSQL for structured data storage and use ChromaDB for vector storage. Create a simple PostgreSQL schema for users, sessions, etc., without pgvector complexity. Pre-embed sample documents into a Chroma collection and include them in the project repository. Ensure compatibility with Python 3.13 and update requirements.txt with necessary packages.",
+        "testStrategy": "Verify the PostgreSQL schema is correctly set up and ChromaDB is functioning with pre-embedded documents. Ensure the setup process is simple for testers and that all components are compatible with Python 3.13.",
         "subtasks": [
           {
-            "id": 2,
-            "title": "Install ChromaDB",
-            "description": "Set up ChromaDB for vector storage.",
-            "status": "done",
-            "dependencies": [],
-            "details": "Install ChromaDB as it is embedded and requires no additional setup. Ensure it is ready to store and manage vector data.",
-            "testStrategy": "Verify ChromaDB installation by checking its availability and ability to store vector data."
-          },
-          {
             "id": 3,
-            "title": "Create Simple PostgreSQL Schema",
-            "description": "Establish a simple schema in PostgreSQL for structured data.",
-            "status": "pending",
-            "dependencies": [],
-            "details": "Create tables for users, sessions, and other necessary structured data using the CREATE TABLE command.",
-            "testStrategy": "Connect to the PostgreSQL database and verify that the tables are created and accessible."
-          },
-          {
-            "id": 4,
             "title": "Pre-embed Sample Documents into Chroma Collection",
             "description": "Embed sample documents into ChromaDB and include them in the project repository.",
             "status": "pending",
@@ -106,13 +88,31 @@
             "testStrategy": "Verify that the documents are correctly embedded in ChromaDB and accessible for testing."
           },
           {
-            "id": 5,
+            "id": 4,
             "title": "Document Setup Process for Testers",
             "description": "Create documentation for the setup process to assist testers.",
             "status": "pending",
             "dependencies": [],
-            "details": "Write clear instructions on setting up PostgreSQL and ChromaDB, including any necessary configurations and how to access pre-embedded documents.",
+            "details": "Write clear instructions on setting up PostgreSQL and ChromaDB, including any necessary configurations and how to access pre-embedded documents. Ensure documentation reflects the hybrid database setup and Python 3.13 compatibility.",
             "testStrategy": "Review the documentation for clarity and completeness, ensuring it guides testers through the setup process without issues."
+          },
+          {
+            "id": 5,
+            "title": "Install PostgreSQL",
+            "description": "Set up the PostgreSQL database server on the system.",
+            "status": "done",
+            "dependencies": [],
+            "details": "Download and install the appropriate version of PostgreSQL for your operating system. Ensure that the installation includes all necessary components for database management.",
+            "testStrategy": "Verify the installation by connecting to the PostgreSQL server using the psql command-line tool and executing a simple query to confirm functionality."
+          },
+          {
+            "id": 2,
+            "title": "Install ChromaDB",
+            "description": "Set up ChromaDB for vector storage.",
+            "status": "done",
+            "dependencies": [],
+            "details": "Install ChromaDB as it is embedded and requires no additional setup. Ensure it is ready to store and manage vector data.",
+            "testStrategy": "Verify ChromaDB installation by checking its availability and ability to store vector data."
           },
           {
             "id": 1,
@@ -129,7 +129,7 @@
         "id": 3,
         "title": "Develop RAG Document Search Tool",
         "description": "Implement the RAG tool for document search using semantic similarity.",
-        "details": "Use Dockling for document chunking and text-embedding-3-large for embeddings. Integrate with pgvector for semantic search capabilities. Implement API endpoints to handle search queries.",
+        "details": "Use Dockling for document chunking and text-embedding-3-large for embeddings. Integrate with ChromaDB for semantic search capabilities. Implement API endpoints to handle search queries.",
         "testStrategy": "Test the RAG tool by querying sample documents and verifying that relevant results are returned based on semantic similarity.",
         "priority": "medium",
         "dependencies": [
@@ -159,12 +159,12 @@
           },
           {
             "id": 3,
-            "title": "Integrate pgvector for Semantic Search",
-            "description": "Set up pgvector in PostgreSQL to store and perform semantic searches on the generated embeddings.",
+            "title": "Integrate ChromaDB for Semantic Search",
+            "description": "Set up ChromaDB to store and perform semantic searches on the generated embeddings.",
             "dependencies": [
               "3.2"
             ],
-            "details": "Install the pgvector extension in PostgreSQL, create a table to store embeddings, and implement similarity search queries.",
+            "details": "Ensure ChromaDB is ready to store embeddings and implement similarity search queries.",
             "status": "pending",
             "testStrategy": "Test the semantic search functionality by querying the database and verifying that relevant document chunks are retrieved based on similarity."
           },
@@ -175,7 +175,7 @@
             "dependencies": [
               "3.3"
             ],
-            "details": "Implement RESTful API endpoints that accept search queries, process them to find similar document chunks using pgvector, and return the results.",
+            "details": "Implement RESTful API endpoints that accept search queries, process them to find similar document chunks using ChromaDB, and return the results.",
             "status": "pending",
             "testStrategy": "Ensure that the API endpoints correctly process search queries and return relevant results with appropriate response times."
           },

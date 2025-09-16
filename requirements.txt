@@ -8,12 +8,13 @@ langchain>=0.0.348
 langchain-openai>=0.0.2
 langchain-community>=0.0.10
 
-# Document processing and chunking
-# Note: Using alternative document processing libraries
-pypdf==3.17.4
-python-docx==1.1.0
-beautifulsoup4==4.12.2
-lxml==4.9.3
+# Document processing and chunking (AI-optimized)
+docling==2.52.0          # Advanced document processing for AI workflows
+tiktoken==0.11.0         # OpenAI tokenizer for chunking
+pypdf==3.17.4           # PDF backup processing
+python-docx==1.1.0      # Word document processing
+beautifulsoup4==4.12.2  # HTML processing
+lxml==5.4.0             # XML/HTML parsing
 
 # Database and Vector Search
 psycopg[binary]==3.2.10  # PostgreSQL adapter (Python 3.13 compatible)
