@@ -70,7 +70,7 @@ def query_database(natural_language_query: str) -> str:
     try:
         # 1. Generate SQL from the natural language query
         llm = ChatOpenAI(
-            model=os.getenv("TEXT_TO_SQL_MODEL", "gpt-4o-mini"),
+            model=os.getenv("TEXT_TO_SQL_MODEL", "gpt-4o"),
             temperature=0
         )
         sql_query = llm.invoke(prompt).content.strip()

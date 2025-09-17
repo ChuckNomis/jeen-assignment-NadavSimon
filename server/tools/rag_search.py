@@ -54,7 +54,7 @@ def search_documents(query: str) -> str:
         # 1. Define a relevance score threshold
         # ChromaDB's distance is often L2 or cosine. For cosine, score = 1 - distance.
         # A lower distance is better. A score > 0.7 is generally considered good.
-        relevance_threshold = 0.6
+        relevance_threshold = 0.3
 
         # 2. Filter results based on the threshold and format them
         formatted_chunks = []
