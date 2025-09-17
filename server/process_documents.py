@@ -50,9 +50,9 @@ class DocumentEmbedder:
         # Initialize OpenAI client
         self.openai_client = OpenAI(api_key=self.openai_api_key)
         
-        # Hardcoded configuration (no environment variables)
+        # Hardcoded configuration 
         self.embedding_model = "text-embedding-3-large"
-        self.chunk_size = 512  # Reduced to avoid token length issues
+        self.chunk_size = 512 
         self.chunk_overlap = 200
         self.chroma_dir = "./data/chroma_db"
         self.collection_name = "ai_assistant_docs"
