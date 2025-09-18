@@ -97,15 +97,6 @@ ON CONFLICT (email) DO NOTHING;
 SELECT name, email, balance FROM users WHERE active = TRUE ORDER BY balance DESC;
 
 
-
-## 💬 Conversation Memory Feature
-
-The assistant now supports **multiturn conversations** with memory! This means:
-
-- **Remembers context**: The assistant remembers your entire conversation
-- **Natural follow-ups**: Ask follow-up questions without repeating context
-- **Easy reset**: Use the "New Chat" button to start fresh conversations
-
 ## 🔍 Example Queries to Test
 
 ### 📚 Document Search Tool (searches uploaded documents)
@@ -200,13 +191,6 @@ Retrieves current conversation history.
   ]
 }
 ```
-
-### How Conversation Memory Works
-
-1. **First message**: Automatically starts a new conversation
-2. **Follow-up messages**: Agent remembers all previous context
-3. **New chat**: Call `/api/chat/new` or click "New Chat" button to reset
-4. **Memory storage**: Stored in server memory (cleared on restart)
 
 ### Interactive Docs: `http://localhost:8000/docs`
 
