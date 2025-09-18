@@ -1,0 +1,11 @@
+.message-list {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+  .message-list {
+    padding: 0 0.5rem;
+  }
+}
