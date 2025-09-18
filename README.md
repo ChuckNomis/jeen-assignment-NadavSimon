@@ -12,14 +12,6 @@ A powerful AI assistant with RAG (Retrieval-Augmented Generation) capabilities, 
 
 **⚠️ Important:** After cloning this repo, you'll need to:
 
-1. **Install PostgreSQL** if not already installed:
-   - Windows: Download from [postgresql.org](https://www.postgresql.org/download/windows/)
-   - Mac: `brew install postgresql`
-   - Linux: `sudo apt install postgresql postgresql-contrib`
-2. **Start PostgreSQL service** and ensure it's running
-3. Create the `.env` file (see step 1 below)
-4. Create a fresh virtual environment
-
 ### 1. Environment Setup
 
 Create `.env` file in `server/` directory:
