@@ -33,6 +33,19 @@ def run_test():
     except requests.exceptions.RequestException as e:
         handle_error(e)
 
+ # --- Test 3: Query designed for a db answer
+    direct_query = "give me all the emails of the users that are active."
+    print(f"\n--- Sending db query ---\nQuery: {direct_query}\n")
+
+    try:
+        response = requests.post(url, headers=headers,
+                                 data=json.dumps({"query": direct_query}))
+        response.raise_for_status()
+        print("--- db Agent Response ---")
+        print(json.dumps(response.json(), indent=2))
+    except requests.exceptions.RequestException as e:
+        handle_error(e)
+
 
 def handle_error(e):
     """Handles connection errors for the test script."""

@@ -70,7 +70,7 @@ React frontend will be set up in the `client/` directory.
 
 ## Tech Stack
 
-- **Backend**: FastAPI, Python 3.13
+- **Backend**: FastAPI, Python 3.12 (Note: Using 3.12 is recommended to avoid compiling dependencies from source)
 - **AI**: OpenAI GPT-4o, LangChain
 - **Database**: PostgreSQL with pgvector
 - **Frontend**: React (to be set up)

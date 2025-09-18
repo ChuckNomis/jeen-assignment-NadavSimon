@@ -4,10 +4,16 @@ Database Tool to query the PostgreSQL database.
 
 import os
 import json
-import psycopg2
+import psycopg
+import re
 from dotenv import load_dotenv
 from langchain.tools import tool
 from langchain_openai import ChatOpenAI
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Load environment variables
 load_dotenv('../.env')
@@ -18,16 +24,19 @@ load_dotenv('.env')
 
 def get_db_connection():
     """Establishes a connection to the PostgreSQL database."""
+    db_params = {
+        "dbname": os.getenv("DB_NAME", "ai_assistant"),
+        "user": os.getenv("DB_USER", "postgres"),
+        "password": os.getenv("DB_PASSWORD", "postgres123"),
+        "host": os.getenv("DB_HOST", "localhost"),
+        "port": os.getenv("DB_PORT", "5432")
+    }
+    logger.info(
+        f"Connecting to database with user '{db_params['user']}' on host '{db_params['host']}'")
     try:
-        conn = psycopg2.connect(
-            dbname=os.getenv("DB_NAME", "postgres"),
-            user=os.getenv("DB_USER", "postgres"),
-            password=os.getenv("DB_PASSWORD", "postgres"),
-            host=os.getenv("DB_HOST", "localhost"),
-            port=os.getenv("DB_PORT", "5432")
-        )
+        conn = psycopg.connect(**db_params)
         return conn
-    except psycopg2.OperationalError as e:
+    except psycopg.OperationalError as e:
         print(f"Error connecting to the database: {e}")
         return None
 
@@ -57,6 +66,7 @@ def query_database(natural_language_query: str) -> str:
 
     prompt = f"""
     Based on the following database schema, convert the user's question into a valid PostgreSQL query.
+    IMPORTANT: You are a read-only assistant. You must only generate SELECT queries. Do not generate any statements that modify the database, like INSERT, UPDATE, DELETE, DROP, or ALTER.
     Only output the SQL query and nothing else.
 
     Schema:
@@ -74,6 +84,14 @@ def query_database(natural_language_query: str) -> str:
             temperature=0
         )
         sql_query = llm.invoke(prompt).content.strip()
+
+        # More robustly clean the SQL query from markdown formatting
+        match = re.search(r"```(?:sql)?\s*(.*?)\s*```", sql_query, re.DOTALL)
+        if match:
+            sql_query = match.group(1).strip()
+        else:
+            # If no markdown block is found, assume the whole string is the query
+            sql_query = sql_query.strip()
 
         # 2. Execute the query
         conn = get_db_connection()
