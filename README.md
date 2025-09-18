@@ -1,6 +1,6 @@
-# 🤖 AI Multi-Search Assistant
+# AI Multi-Search Assistant
 
-A powerful AI assistant with RAG (Retrieval-Augmented Generation) capabilities, **conversation memory**, and a modern ChatGPT-like interface. Uses ChromaDB vector database for document search, PostgreSQL for user data, and intelligently chooses between document search, database queries, or direct AI responses. **Now with multiturn conversation support** - the assistant remembers your conversation history!
+A powerful AI assistant with RAG (Retrieval-Augmented Generation) capabilities, **conversation memory**. Uses ChromaDB vector database for document search, PostgreSQL for user data, and intelligently chooses between document search, database queries, or direct AI responses.
 
 ## 🚀 Quick Setup
 
@@ -139,7 +139,9 @@ The assistant now supports **multiturn conversations** with memory! This means:
 
 ## 📚 Knowledge Base
 
-The system includes 8 documents covering:
+The system includes 8 documents covering various topics. **Document processing and chunking is powered by [Docling](https://github.com/DS4SD/docling)**, which provides advanced PDF parsing and intelligent text segmentation for optimal retrieval performance.
+
+**📁 Document Location:** All documents are stored in `server/data/documents/` directory.
 
 | Document                                              | Topic               | Description                 |
 | ----------------------------------------------------- | ------------------- | --------------------------- |
