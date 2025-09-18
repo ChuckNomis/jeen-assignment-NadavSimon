@@ -124,7 +124,7 @@ SELECT name, email, balance FROM users WHERE active = TRUE ORDER BY balance DESC
 
 The system includes 8 documents covering various topics.
 
-**Document processing and chunking is powered by [Docling](https://github.com/DS4SD/docling)**.
+**Document processing and chunking is powered by Docling https://github.com/DS4SD/docling**.
 This provides advanced PDF parsing and intelligent text segmentation for optimal retrieval performance.
 
 **📁 Document Location:** All documents are stored in `server/data/documents/` directory.
