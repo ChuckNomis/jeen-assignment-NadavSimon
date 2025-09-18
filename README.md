@@ -111,7 +111,7 @@ SELECT name, email, balance FROM users WHERE active = TRUE ORDER BY balance DESC
 ### 📚 Document Search Tool (searches uploaded documents)
 
 - _"What are the different levels of vehicle automation?"_
-- _"How can architects incorporate renewable energy into building design?"_
+- _"How can architects incorporate renewable energy into building design"_
 - _"What are the main cybersecurity risks associated with AI systems?"_
 - _"For African violet or geranium, which cutting type does the guide recommend and what after‑care steps ensure successful rooting?"_
 
