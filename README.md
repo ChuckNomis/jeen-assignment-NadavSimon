@@ -1,6 +1,6 @@
 # 🤖 AI Multi-Search Assistant
 
-A powerful AI assistant with RAG (Retrieval-Augmented Generation) capabilities and a modern ChatGPT-like interface. Uses ChromaDB vector database for document search, PostgreSQL for user data, and intelligently chooses between document search, database queries, or direct AI responses.
+A powerful AI assistant with RAG (Retrieval-Augmented Generation) capabilities, **conversation memory**, and a modern ChatGPT-like interface. Uses ChromaDB vector database for document search, PostgreSQL for user data, and intelligently chooses between document search, database queries, or direct AI responses. **Now with multiturn conversation support** - the assistant remembers your conversation history!
 
 ## 🚀 Quick Setup
 
@@ -106,6 +106,14 @@ SELECT name, email, balance FROM users WHERE active = TRUE ORDER BY balance DESC
 
 
 
+## 💬 Conversation Memory Feature
+
+The assistant now supports **multiturn conversations** with memory! This means:
+
+- **Remembers context**: The assistant remembers your entire conversation
+- **Natural follow-ups**: Ask follow-up questions without repeating context
+- **Easy reset**: Use the "New Chat" button to start fresh conversations
+
 ## 🔍 Example Queries to Test
 
 ### 📚 Document Search Tool (searches uploaded documents)
@@ -124,6 +132,11 @@ SELECT name, email, balance FROM users WHERE active = TRUE ORDER BY balance DESC
 
 - _"Tell me a joke"_
 
+### 🧠 Conversation Memory Examples
+
+- _"My name is John and I'm researching autonomous vehicles."_ → _"Do you remember my name?"_ → _"What safety features did you mention earlier?"_
+- _"I need info about user alice.brown@example.com"_ → _"What's her current status?"_ → _"How does that compare to other users?"_
+
 ## 📚 Knowledge Base
 
 The system includes 8 documents covering:
@@ -141,16 +154,16 @@ The system includes 8 documents covering:
 
 ## 🛠️ API
 
-### Main Endpoint: `POST /api/chat`
+### Main Chat Endpoint: `POST /api/chat`
 
+**Request:**
 ```json
 {
   "query": "What are the main AI safety concerns?"
 }
-````
+```
 
 **Response:**
-
 ```json
 {
   "query": "What are the main AI safety concerns?",
@@ -161,8 +174,49 @@ The system includes 8 documents covering:
 }
 ```
 
+### Conversation Management Endpoints
+
+#### Start New Conversation: `POST /api/chat/new`
+Clears conversation memory and starts fresh.
+
+**Response:**
+```json
+{
+  "message": "New chat session started",
+  "status": "success"
+}
+```
+
+#### Get Chat History: `GET /api/chat/history`
+Retrieves current conversation history.
+
+**Response:**
+```json
+{
+  "message_count": 4,
+  "messages": [
+    {
+      "type": "human",
+      "content": "Hello! My name is Alice."
+    },
+    {
+      "type": "ai",
+      "content": "Hello Alice! How can I help you today?"
+    }
+  ]
+}
+```
+
+### How Conversation Memory Works
+
+1. **First message**: Automatically starts a new conversation
+2. **Follow-up messages**: Agent remembers all previous context
+3. **New chat**: Call `/api/chat/new` or click "New Chat" button to reset
+4. **Memory storage**: Stored in server memory (cleared on restart)
+
 ### Interactive Docs: `http://localhost:8000/docs`
 
 ---
 
 **Built with FastAPI, React, and LangChain**
+````

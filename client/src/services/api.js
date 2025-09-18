@@ -31,6 +31,28 @@ export const sendMessage = async (query) => {
   }
 };
 
+// Start a new chat conversation (clears memory)
+export const startNewChat = async () => {
+  try {
+    const response = await api.post('/api/chat/new');
+    return response.data;
+  } catch (error) {
+    console.error('API Error starting new chat:', error);
+    throw new Error('Failed to start new chat session');
+  }
+};
+
+// Get conversation history
+export const getChatHistory = async () => {
+  try {
+    const response = await api.get('/api/chat/history');
+    return response.data;
+  } catch (error) {
+    console.error('API Error getting chat history:', error);
+    throw new Error('Failed to get chat history');
+  }
+};
+
 // Health check endpoint
 export const checkHealth = async () => {
   try {

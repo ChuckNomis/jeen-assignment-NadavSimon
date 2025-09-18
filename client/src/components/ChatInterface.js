@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import MessageList from './MessageList';
 import InputBox from './InputBox';
-import { sendMessage } from '../services/api';
+import { sendMessage, startNewChat, getChatHistory } from '../services/api';
 import './ChatInterface.css';
 
 const ChatInterface = () => {
@@ -9,11 +9,12 @@ const ChatInterface = () => {
     {
       id: 1,
       type: 'assistant',
-      content: 'Hello! I\'m your AI Multi-Search Assistant. I can help you with questions about AI, technology policy, and user account information. How can I assist you today?',
+      content: 'Hello! I\'m your AI Multi-Search Assistant. How can I help you?',
       timestamp: new Date()
     }
   ]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isStartingNewChat, setIsStartingNewChat] = useState(false);
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -70,10 +71,48 @@ const ChatInterface = () => {
     }
   };
 
+  const handleNewChat = async () => {
+    setIsStartingNewChat(true);
+    try {
+      await startNewChat();
+      
+      // Reset messages to initial state
+      setMessages([
+        {
+          id: Date.now(),
+          type: 'assistant',
+          content: 'Hello! I\'m your AI Multi-Search Assistant. How can I help you?',
+          timestamp: new Date()
+        }
+      ]);
+    } catch (error) {
+      console.error('Error starting new chat:', error);
+      // Add error message
+      const errorMessage = {
+        id: Date.now(),
+        type: 'assistant',
+        content: 'Sorry, I encountered an error while starting a new chat. Please try again.',
+        timestamp: new Date(),
+        isError: true
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
+      setIsStartingNewChat(false);
+    }
+  };
+
   return (
     <div className="chat-interface">
       <div className="chat-header">
         <h1>AI Multi-Search Assistant</h1>
+        <button 
+          className="new-chat-button"
+          onClick={handleNewChat}
+          disabled={isStartingNewChat || isLoading}
+          title="Start a new conversation (clears memory)"
+        >
+          {isStartingNewChat ? 'Starting...' : '🔄 New Chat'}
+        </button>
       </div>
       
       <div className="chat-container">
