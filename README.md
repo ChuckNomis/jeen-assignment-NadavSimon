@@ -1,6 +1,6 @@
 # 🤖 AI Multi-Search Assistant
 
-A powerful AI assistant with RAG (Retrieval-Augmented Generation) capabilities and a modern ChatGPT-like interface. Intelligently chooses between document search, database queries, or direct AI responses.
+A powerful AI assistant with RAG (Retrieval-Augmented Generation) capabilities and a modern ChatGPT-like interface. Uses ChromaDB vector database for document search, PostgreSQL for user data, and intelligently chooses between document search, database queries, or direct AI responses.
 
 ## 🚀 Quick Setup
 
@@ -8,8 +8,17 @@ A powerful AI assistant with RAG (Retrieval-Augmented Generation) capabilities a
 
 - **Python 3.12+**
 - **Node.js 18+**
-- **PostgreSQL 15+**
-- **OpenAI API Key**
+- **PostgreSQL 15+** (must be installed and running)
+
+**⚠️ Important:** After cloning this repo, you'll need to:
+
+1. **Install PostgreSQL** if not already installed:
+   - Windows: Download from [postgresql.org](https://www.postgresql.org/download/windows/)
+   - Mac: `brew install postgresql`
+   - Linux: `sudo apt install postgresql postgresql-contrib`
+2. **Start PostgreSQL service** and ensure it's running
+3. Create the `.env` file (see step 1 below)
+4. Create a fresh virtual environment
 
 ### 1. Environment Setup
 
@@ -35,6 +44,9 @@ DB_PASSWORD=postgres123
 ```bash
 cd server
 
+# Create virtual environment
+python -m venv venv
+
 # Activate virtual environment
 # Windows:
 .\venv\Scripts\Activate.ps1
@@ -47,7 +59,6 @@ pip install -r requirements.txt
 # Set up database
 python config/database_setup.py
 
-# Process documents for search
 The documents are already processed and are in the VectorDB
 
 # Start server
