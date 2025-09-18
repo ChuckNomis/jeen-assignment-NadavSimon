@@ -10,7 +10,8 @@ langchain-community==0.2.5
 langchain-core==0.2.8
 
 # Document processing and chunking
-# Note: Using alternative document processing libraries
+# Note: Using Docling for advanced PDF processing
+docling==2.53.0
 pypdf==3.17.4
 python-docx==1.1.0
 beautifulsoup4==4.12.2
