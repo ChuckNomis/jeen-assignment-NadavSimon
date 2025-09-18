@@ -34,7 +34,7 @@ TEXT_TO_SQL_MODEL=gpt-4o
 # --- PostgreSQL Database Configuration (defaults) ---
 DB_HOST=localhost
 DB_PORT=5432
-DB_NAME=ai_assistant
+DB_NAME=ai_assistant_users
 DB_USER=postgres
 DB_PASSWORD=postgres123
 ```
