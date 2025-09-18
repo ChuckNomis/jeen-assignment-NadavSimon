@@ -67,6 +67,10 @@ server/.env
 *.sqlite3
 postgresql_data/
 
+# Allow ChromaDB vector database
+!server/data/chroma_db/
+!server/data/chroma_db/**
+
 # Editor directories and files
 .idea
 .vscode

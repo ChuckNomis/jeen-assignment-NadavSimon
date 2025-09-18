@@ -13,7 +13,6 @@ os.environ["ANONYMIZED_TELEMETRY"] = "False"
 
 # Try to load from multiple possible locations
 load_dotenv('../.env')
-load_dotenv('../../.env')
 load_dotenv('.env')
 
 
